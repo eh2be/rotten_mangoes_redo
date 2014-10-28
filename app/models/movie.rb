@@ -7,6 +7,10 @@ class Movie < ActiveRecord::Base
 
   ## I've commented this out because I want to allow movies from the past to be in my db!!
   # validate :release_date_is_in_the_future
+
+  def review_average
+    reviews.sum(:rating_out_of_ten)/reviews.size if reviews.size > 0 
+  end
   
   # protected
   
