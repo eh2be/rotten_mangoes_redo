@@ -1,6 +1,8 @@
 <h1>User Details for <%= @user.firstname %> <%= @user.lastname %></h1>
 
-<h2><%= link_to "edit", edit_admin_user_path(@user) %></h2>
+<h2><%= link_to "edit", edit_admin_user_path(@user) %>
+    <%= link_to "delete", admin_user_path(@user), method: :delete, confirm: "You sure?" %>
+</h2>
 
 <h2>User ID:    <%= @user.id %></h2>
 <h2>First Name: <%= @user.firstname %></h2>

@@ -1,5 +1,12 @@
 class Admin::UsersController < ApplicationController
 
+  # before_filter :authenticate_user!
+  before_filter :is_admin?
+
+  def admin?
+    self.admin == true
+  end
+
   def index
     @users = User.order("lastname").page(params[:page]).per(5)
   end
@@ -32,5 +39,15 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:email, :firstname, :lastname, :password, :password_confirmation, :admin)
   end
 
+  protected
+
+  def is_admin?
+    if current_user.admin?
+      true
+    else
+      # render :text => "Buhbye"
+      redirect_to movies_path
+    end
+  end
 
 end
