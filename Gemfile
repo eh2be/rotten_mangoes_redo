@@ -41,3 +41,10 @@ gem 'bcrypt', '~> 3.1.7'
 # for uploading images
 gem "carrierwave"
 gem 'rmagick', :require => 'RMagick'
+
+# for seeding databases (require in seed.rb file)
+gem "factory_girl_rails", "~> 4.0"
+gem 'faker'
+
+# for pagination
+gem 'kaminari'
