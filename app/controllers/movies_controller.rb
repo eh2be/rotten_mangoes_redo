@@ -1,6 +1,15 @@
 class MoviesController < ApplicationController
+  ## This is the default
+  # def index
+  #   @movies = Movie.all
+  # end
+  ## ...but this is what we're implementing for the search function
   def index
-    @movies = Movie.all
+    if params[:search]
+      @movies = Movie.search(params[:search])
+    else
+      @movies = Movie.all
+    end
   end
 
   def show
