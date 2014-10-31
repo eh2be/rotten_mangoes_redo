@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    @users = User.order("lastname").page(params[:page]).per(5)
+    @users = User.order("lastname").page(params[:page]).per(15)
   end
 
   def show
@@ -32,7 +32,8 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_user_path
+    UserMailer.mail_on_delete(@user).deliver
+    redirect_to admin_users_path
   end
 
   def user_params
