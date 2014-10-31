@@ -21,25 +21,24 @@ class Movie < ActiveRecord::Base
   end
   
   def self.search(search)
-    ## right idea but doesn't work
-    # filter_by_title = Movie.where("title LIKE ?", "%#{search}%")
-    # filter_by_director = Movie.where("director LIKE ?", "%#{search}%")
+    filter_by_title = Movie.where("title LIKE ?", "%#{search}%")
+    filter_by_director = Movie.where("director LIKE ?", "%#{search}%")
 
-    # if search != ""
-    #   results = filter_by_title
-    #   results = results.filter_by_director
-    #   results
-    # else
-    #   results = Movie.all
-    # end
-
-    ## kinda works
     if search != ""
-      results = Movie.where("title LIKE ? OR director LIKE ?", "%#{search}%", "%#{search}%")
+      results = filter_by_title
+      results += filter_by_director
       results
     else
       results = Movie.all
     end
+
+    ## also kinda works
+    # if search != ""
+    #   results = Movie.where("title LIKE ? OR director LIKE ?", "%#{search}%", "%#{search}%")
+    #   results
+    # else
+    #   results = Movie.all
+    # end
   end
 
 
